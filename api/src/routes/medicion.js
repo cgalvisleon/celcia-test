@@ -1,10 +1,13 @@
 const express = require("express");
+const Service = require("../services/medicion");
 const authr = require("../middleware/authr");
 
 function Api(app) {
   const router = express.Router();
   app.use("/mediciones", router);
   app.use("/mediciones", authr);
+
+  const service = new Service();
 
   router.get("/", async function (req, res) {
     const { dateint } = req.query;
