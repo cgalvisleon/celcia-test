@@ -1,9 +1,9 @@
 const Model = require("../models/auth");
 
 class Service {
-  async signUp({ username, password, confirmation }) {
+  async signUp({ username, password, confirmacion }) {
     const model = new Model();
-    return await model.signUp(username, password, confirmation);
+    return await model.signUp(username, password, confirmacion);
   }
 
   async signIn({ username, password }) {

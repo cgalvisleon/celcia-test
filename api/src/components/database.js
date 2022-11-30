@@ -1,4 +1,4 @@
-const Model = require("../models/auth");
+const { Client } = require("pg");
 const config = require("./config");
 
 class database {

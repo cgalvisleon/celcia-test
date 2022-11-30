@@ -7,10 +7,10 @@ class Model {
     this.db = new database();
   }
 
-  async signUp(username, password, confirmation) {
-    if (password != confirmation) {
+  async signUp(username, password, confirmacion) {
+    if (password != confirmacion) {
       return {
-        message: "Conrimación no coincide con el password",
+        message: "Confirmación no coincide con el password",
       };
     }
 
@@ -19,6 +19,8 @@ class Model {
     INSERT INTO test.USERS(ID, USERNAME, PASSWORD)
     VALUES($1, $2, $3) RETURNING ID, USERNAME`;
     params = [id, username, password];
+
+    console.log(query, params);
 
     return await this.db.insert(query, params).then((result) => {
       console.log(result);
