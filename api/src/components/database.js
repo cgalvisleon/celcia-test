@@ -18,6 +18,7 @@ class database {
       password: config.read_db_password,
       port: config.read_db_port,
     });
+    con;
   }
 
   connectWrite() {

@@ -1,0 +1,40 @@
+version: "3.1"
+
+services:
+  pg:
+    build: "./database"
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "1m"
+        max-file: "2"
+    restart: always
+    ports:
+      - 5433:5432
+    environment:
+      DB_USER: test
+      DB_PASSWORD: test
+      DB_HOST: pg
+      DB_PORT: 5432
+      DB_DATABASE: jfbase
+    volumes:
+      - "$HOME/data:/var/lib/postgresql/data"
+
+  replica:
+    build: "./database"
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "1m"
+        max-file: "2"
+    restart: always
+    ports:
+      - 5433:5432
+    environment:
+      READ_DB_USER: test
+      READ_DB_PASSWORD: test
+      READ_DB_HOST: replica
+      READ_DB_PORT: 5432
+      READ_DB_DATABASE: test
+    volumes:
+      - "$HOME/data:/var/lib/postgresql/data"
