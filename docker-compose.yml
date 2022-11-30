@@ -38,3 +38,29 @@ services:
       READ_DB_DATABASE: test
     volumes:
       - "$HOME/data:/var/lib/postgresql/data"
+
+  api:
+    build: "./api"
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "1m"
+        max-file: "2"
+    restart: always
+    ports:
+      - 3000:80
+    environment:
+      DB_USER: test
+      DB_PASSWORD: test
+      DB_HOST: pg
+      DB_PORT: 5432
+      DB_DATABASE: jfbase
+      READ_DB_USER: test
+      READ_DB_PASSWORD: test
+      READ_DB_HOST: replica
+      READ_DB_PORT: 5432
+      READ_DB_DATABASE: test
+    deploy:
+      replicas: 4
+      placement:
+        constraints: [node.role==worker]
